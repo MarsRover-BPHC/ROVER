@@ -1,0 +1,7 @@
+Slam Resources:
+
+Hector Slam: https://automaticaddison.com/how-to-build-an-indoor-map-using-ros-and-lidar-based-slam/#google_vignette  
+
+Ldlidar setup : https://github.com/ldrobotSensorTeam/ldlidar_stl_ros2#Instructions 
+
+Simulations (TurtleBot3) : https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/#overview
