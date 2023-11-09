@@ -1,0 +1,10 @@
+Files in robot movement:
+ENcoder:Gets data from wheel encoders and then publish the angular velocity of a single wheel(No nodes used)
+
+Bot_control_trial: Takes in the left_motor_velocity (node sub : ”left_motor_velocity”) and right_motor_velocity (node sub :”right_motor_velocity”)  and then publish the odometry(node pub:”odom”)  and tf transformation.
+
+cmd_vel_to_vel:Takes in the linear and angular velocity and then calculates the individual left(node pub:”left_motor_velocity”)  and right velocity(node pub:”right_motor_velocity”) .
+
+diff_drive_printer:this code creates a ROS node that takes in velocity commands on the /cmd_vel topic and calculates the robot's position and orientation over time. It publishes this odometry information on the /odom topic and broadcasts the transformation between the robot's base_link and the odom frame.
+
+kuch:his script reads data from an IR sensor connected to a Raspberry Pi, calculates the angular velocity of a rotating object, and publishes this angular velocity (node pub : “omega”) to a ROS topic named 'omega' as a string message
