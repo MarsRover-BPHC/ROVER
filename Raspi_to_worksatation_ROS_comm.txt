@@ -1,0 +1,32 @@
+To make your Raspberry Pi send ROS topics to your workstation, you need to set up the necessary configurations and establish communication between the two devices. Here are the steps you can follow:
+
+Install ROS on both your Raspberry Pi and your workstation:
+   For the Raspberry Pi, you can use the ROS installation instructions for ARM-based systems. You may want to install the ROS version that matches your workstation's ROS version for compatibility.
+   For your workstation, follow the ROS installation instructions specific to your operating system.
+
+Set up the ROS environment on both devices:
+   On the Raspberry Pi, configure the ROS environment by sourcing the ROS setup file in your .bashrc or .bash_profile file:
+          echo "source /opt/ros//setup.bash" >> ~/.bashrc
+     source ~/.bashrc
+        On your workstation, do the same to source the ROS setup file with the appropriate ROS version.
+
+Configure the ROS Master:
+   On your Raspberry Pi, set the ROS_MASTER_URI to point to your workstation's IP address. Open a terminal and execute the following command, replacing `` with the IP address of your workstation:
+          echo "export ROS_MASTER_URI=http://:11311" >> ~/.bashrc
+     source ~/.bashrc
+        On your workstation, ensure that the ROS_MASTER_URI is set to the correct IP address. It should be set to http://localhost:11311 by default.
+
+Configure the ROS IP:
+   On your Raspberry Pi, set the ROS_IP to the IP address of the Raspberry Pi itself. Open a terminal and execute the following command:
+          echo "export ROS_IP=" >> ~/.bashrc
+     source ~/.bashrc
+          Replace `` with the IP address of your Raspberry Pi.
+
+Test the connection:
+   On your Raspberry Pi, run a simple ROS publisher node that publishes a test topic. For example:
+          rostopic pub /test_topic std_msgs/String "Hello Raspberry Pi!"
+        On your workstation, open a new terminal and listen to the topic being published by the Raspberry Pi:
+          rostopic echo /test_topic
+          You should see the message "Hello Raspberry Pi!" being printed.
+
+Once you have successfully completed these steps, your Raspberry Pi should be able to send ROS topics to your workstation. You can develop more complex ROS nodes on the Raspberry Pi to publish different topics that can be received and processed by your workstation.
