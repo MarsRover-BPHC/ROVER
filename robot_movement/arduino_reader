@@ -1,0 +1,50 @@
+String incomingString ; // for incoming serial data
+double Lvel=0,Rvel=0;
+void setup() {
+  Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
+  pinMode(A4,OUTPUT);
+  pinMode(2,OUTPUT);
+  pinMode(3,OUTPUT);
+  pinMode(4,OUTPUT);
+  pinMode(5,OUTPUT);
+  pinMode(A15 ,OUTPUT);
+}
+
+void loop() {
+  // send data only when you receive data:
+  if (Serial.available() > 0) {
+    
+    // read the incoming byte:
+    incomingString = Serial.readString();
+    String vel="";
+    
+    // say what you got:
+    int stringLen=incomingString.length();
+    if((incomingString.substring(0,2))=="#@" && incomingString.substring(stringLen-3,stringLen-1)=="@#"){
+      incomingString=incomingString.substring(2,stringLen-2);
+      for(int x=0;x<incomingString.length();x++){
+          if(incomingString[x]==','){
+            Lvel=vel.toDouble();
+            vel="";
+            continue;
+          }
+          vel+=incomingString[x];
+      }
+      Rvel=vel.toDouble();
+    }
+  }
+  double lVelMapped=Lvel*255;
+  double rVelMapped=Rvel*255;
+  Motor_driver(lVelMapped,rVelMapped);
+  delay(100);
+}
+
+int Motor_driver(double lVel,double Rvel){
+  int Ld=lVel>0,Rd=Rvel>0;
+  digitalWrite(2,Ld);
+  digitalWrite(3,1-Ld);
+  digitalWrite(4,Rd);
+  digitalWrite(5,1-Rd);
+  analogWrite(A4,abs(int(lVel)));
+  analogWrite(A15,abs(int(Rvel)));
+}
