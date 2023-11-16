@@ -38,26 +38,27 @@ rospy.Subscriber('right_motor_velocity', Float64, right_velocity_callback)
 
 # ROS spin
 rate = rospy.Rate(10)  # Adjust the rate as per your requirement
-velocity_string=b''
+
 while not rospy.is_shutdown():
+    velocity_string = b''
     if left_velocity > 0:
-        velocity_string+=b'L'
+        velocity_string += b'L'
     elif left_velocity < 0:
-        velocity_string+=b'G'
-    velocity_string+=bytes([(int)(255*left_velocity)])
+        velocity_string += b'G'
+    velocity_string += bytes([int(255 * abs(left_velocity))])
+
     if right_velocity > 0:
-        velocity_string+=b'R'
+        velocity_string += b'R'
     elif right_velocity < 0:
-        velocity_string+=b'B'
-    velocity_string+=bytes([(int)(255*right_velocity)])
-    velocity_string = '#@'+str(lv) + ',' + str(rv)+'@#'
+        velocity_string += b'B'
+    velocity_string += bytes([int(255 * abs(right_velocity))])
 
     # Publish as ROS message
     rospy.loginfo(velocity_string)
     pub.publish(velocity_string)
 
     # Send as serial output
-    serial_port.write(velocity_string.encode())
+    serial_port.write(velocity_string)
 
     rate.sleep()
     time.sleep(0.1)
