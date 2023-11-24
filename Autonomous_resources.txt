@@ -5,3 +5,5 @@ Hector Slam: https://automaticaddison.com/how-to-build-an-indoor-map-using-ros-a
 Ldlidar setup : https://github.com/ldrobotSensorTeam/ldlidar_stl_ros2#Instructions 
 
 Simulations (TurtleBot3) : https://emanual.robotis.com/docs/en/platform/turtlebot3/overview/#overview
+
+Intel Realsense Deapthcam : https://dev.intelrealsense.com/docs/ [all relevent resources for the samer are within this doc] 
